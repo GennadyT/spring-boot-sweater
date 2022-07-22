@@ -25,12 +25,4 @@ public class GreetingController {
         model.put("some","hello, letsCode");
         return "main";
     }
-
-    @GetMapping("/5")
-    public String maina(
-            Map<String, Object> model
-    ){
-        model.put("some","hello, letsCode");
-        return "maina";
-    }
 }
