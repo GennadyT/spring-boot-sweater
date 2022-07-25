@@ -19,12 +19,12 @@ public class MainController {
     private MessageRepo messageRepo;
 
     @GetMapping("/")
-    public String greeting(Map<String,Object> model){
-        return "greeting.ftl";
+    public String greeting(Map<String, Object> model) {
+        return "greeting";
     }
 
     @GetMapping("/main")
-    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model){
+    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
         Iterable<Message> messages = messageRepo.findAll();
 
         if (filter != null && !filter.isEmpty()) {
@@ -33,8 +33,9 @@ public class MainController {
             messages = messageRepo.findAll();
         }
 
-        model.addAttribute("messages" , messages);
-        model.addAttribute("filter" , filter);
+        model.addAttribute("messages", messages);
+        model.addAttribute("filter", filter);
+
         return "main";
     }
 
@@ -43,13 +44,14 @@ public class MainController {
             @AuthenticationPrincipal User user,
             @RequestParam String text,
             @RequestParam String tag, Map<String, Object> model
-    ){
-        Message message = new Message(text,tag, user);
+    ) {
+        Message message = new Message(text, tag, user);
 
         messageRepo.save(message);
 
         Iterable<Message> messages = messageRepo.findAll();
-            model.put("messages" , messages);
+
+        model.put("messages", messages);
 
         return "main";
     }
