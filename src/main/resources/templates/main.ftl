@@ -36,19 +36,22 @@
         </div>
     </div>
 
+<div class="card-columns">
 <#list messages as message>
-<div>
-    <b>${message.id}</b>
-    <span>${message.text}</span>
-    <i>${message.tag}</i>
-    <strong>${message.authorName}</strong>
-    <div>
-       <#if message.filename??>
-           <img src="/img/${message.filename}">
-       </#if> 
+    <div class="card my-3">
+        <#if message.filename??>
+            <img src="/img/${message.filename}" class="card-img-top">
+        </#if>
+        <div class="m-2">
+            <span>${message.text}</span>
+            <i>${message.tag}</i>
+        </div>
+        <div class="card-footer text-muted">
+            ${message.authorName}
+        </div>
     </div>
-</div>
 <#else>
 No message
 </#list>
+</div>
 </@c.page>
