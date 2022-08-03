@@ -26,10 +26,10 @@ public class UserService implements UserDetailsService {
         return userRepo.findByUsername(username);
     }
 
-    public boolean addUser(User user){
+    public boolean addUser(User user) {
         User userFromDb = userRepo.findByUsername(user.getUsername());
 
-        if (userFromDb != null){
+        if (userFromDb != null) {
             return false;
         }
 
@@ -39,13 +39,14 @@ public class UserService implements UserDetailsService {
 
         userRepo.save(user);
 
-        if (!StringUtils.isEmpty(user.getEmail())){
+        if (!StringUtils.isEmpty(user.getEmail())) {
             String message = String.format(
                     "Hello, %s! \n" +
-                            "Welcome to Sweater, Please, visit next link: http://localhost:8080/activate/%s",
+                            "Welcome to Sweater. Please, visit next link: http://localhost:8080/activate/%s",
                     user.getUsername(),
                     user.getActivationCode()
             );
+
             mailSender.send(user.getEmail(), "Activation code", message);
         }
 
@@ -55,7 +56,7 @@ public class UserService implements UserDetailsService {
     public boolean activateUser(String code) {
         User user = userRepo.findByActivationCode(code);
 
-        if (user == null){
+        if (user == null) {
             return false;
         }
 
