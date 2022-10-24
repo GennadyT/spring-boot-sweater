@@ -10,6 +10,7 @@ import java.util.Properties;
 
 @Configuration
 public class MailConfig {
+
     @Value("${spring.mail.host}")
     private String host;
 
@@ -44,8 +45,9 @@ public class MailConfig {
         properties.setProperty("mail.transport.protocol", "smtp");
         properties.setProperty("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.ssl.enable", "true");
+      //  properties.put("mail.smtp.ssl.enable", "true");
         properties.setProperty("mail.smtp.ssl.enable", "true");
+        properties.put("mail.smtp.ssl.trust","smtp.gmail.com");
 
         return mailSender;
     }
